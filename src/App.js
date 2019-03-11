@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import TeamList from './components/TeamList/TeamList';
+import PlayerList from './components/PlayerList/PlayerList';
 import NavBar from './components/NavBar/NavBar';
 
 class App extends Component {
@@ -8,7 +8,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<NavBar />
-				<TeamList />
+				<PlayerList />
 			</div>
 		);
 	}
