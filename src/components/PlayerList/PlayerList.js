@@ -5,10 +5,10 @@ import axios from 'axios';
 class PlayerList extends Component {
 	state = {
 		players: [],
-		ID: '',
+		ID: '', // remove
 		playerName: ''
 	};
-	// https://www.balldontlie.io/api/v1/teams/<ID>
+	// TODO: refactor to use lifecycle
 	// componentDidMount() {
 	// 	axios
 	// 		.get(
@@ -25,6 +25,10 @@ class PlayerList extends Component {
 	// 		.catch(err => {
 	// 			console.log(err);
 	// 		});
+	// }
+
+	// componentDidMount() {
+	// 	this.getPlayer();
 	// }
 
 	getPlayer = () => {
@@ -59,7 +63,7 @@ class PlayerList extends Component {
 	};
 
 	render() {
-		console.log(this.state.players);
+		// console.log(this.state.players);
 		return (
 			<div>
 				{/* <div>{this.state.playerName}</div> */}
@@ -72,6 +76,9 @@ class PlayerList extends Component {
 							onChange={this.handleSearchChange}
 						/>
 					</form>
+				</div>
+				<div>
+					<Player playerInfo={this.state.players} />
 				</div>
 			</div>
 		);
