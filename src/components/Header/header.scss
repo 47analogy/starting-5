@@ -1,0 +1,22 @@
+@import '../../index.scss';
+
+.header {
+	margin-top: 10px;
+	display: flex;
+	height: 70px;
+	background: $warmOrange;
+	border: 1px solid $basicBlack;
+}
+
+.nba-logo {
+	width: 30px;
+	height: 70px;
+	margin-left: 2px;
+}
+
+.title {
+	margin-top: 10px;
+	margin-left: 70px;
+	font-size: 30px;
+	text-transform: capitalize;
+}

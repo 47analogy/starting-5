@@ -3,27 +3,33 @@ import PlayerStats from '../PlayerStats/PlayerStats';
 import axios from 'axios';
 
 class Player extends Component {
-	// state: {
-	// 	id: ''
-	// };
-	// https://www.balldontlie.io/api/v1/teams/<ID>
+	state = {
+		stats: []
+	};
+
 	componentDidMount() {
-		const id = 237;
+		if (this.props.playerID) {
+			this.getStats();
+		}
+	}
+
+	getStats = () => {
 		axios
 			.get(
-				`https://www.balldontlie.io/api/v1/stats/?seasons[]=2018&player_ids[]=${id}&per_page=82`
+				`https://www.balldontlie.io/api/v1/stats/?seasons[]=2018&player_ids[]=${
+					this.props.playerID
+				}&per_page=82`
 			)
 			.then(res => {
-				// console.log(res);
+				console.log('c', this.props.playerID);
 				const stats = res.data;
-				console.log(stats);
+				this.setState({ stats: stats.data });
+				console.log('stats', this.state.stats);
 			})
 			.catch(err => {
 				console.log(err);
 			});
-	}
-
-	getPlayerID = () => {};
+	};
 
 	render() {
 		return (
@@ -41,6 +47,9 @@ class Player extends Component {
 					</div>
 				))}
 				<div>
+					<button onClick={this.getStats} type="button">
+						Get Stats
+					</button>
 					<PlayerStats />
 				</div>
 			</div>

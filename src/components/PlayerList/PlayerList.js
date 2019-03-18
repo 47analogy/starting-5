@@ -5,31 +5,15 @@ import axios from 'axios';
 class PlayerList extends Component {
 	state = {
 		players: [],
-		ID: '', // remove
+		id: 0,
 		playerName: ''
 	};
-	// TODO: refactor to use lifecycle
-	// componentDidMount() {
-	// 	axios
-	// 		.get(
-	// 			`https://www.balldontlie.io/api/v1/players/?search=${
-	// 				this.state.playerName
-	// 			}`
-	// 		)
-	// 		.then(res => {
-	// 			// console.log(res);
-	// 			const players = res.data;
-	// 			this.setState({ players: players.data });
-	// 			console.log(players);
-	// 		})
-	// 		.catch(err => {
-	// 			console.log(err);
-	// 		});
-	// }
 
-	// componentDidMount() {
-	// 	this.getPlayer();
-	// }
+	componentDidMount() {
+		if (this.state.player) {
+			this.getPlayer();
+		}
+	}
 
 	getPlayer = () => {
 		axios
@@ -41,6 +25,7 @@ class PlayerList extends Component {
 			.then(res => {
 				const players = res.data;
 				this.setState({ players: players.data });
+				this.setState({ id: this.state.players.map(player => player.id) });
 			})
 			.catch(err => {
 				console.log(err);
@@ -53,20 +38,13 @@ class PlayerList extends Component {
 
 	onSearchSubmit = event => {
 		// TODO: Fix submit validation
-		// if (this.state.playerName && this.state.playerName > 1) {
-		// 	if (this.state.playerName.length % 2 === 0) {
-		// 		this.getPlayer();
-		// 	}
-		// }
 		this.getPlayer();
 		event.preventDefault();
 	};
 
 	render() {
-		// console.log(this.state.players);
 		return (
 			<div>
-				{/* <div>{this.state.playerName}</div> */}
 				<div className="search-player">
 					<form onSubmit={this.onSearchSubmit}>
 						<input
@@ -78,7 +56,7 @@ class PlayerList extends Component {
 					</form>
 				</div>
 				<div>
-					<Player playerInfo={this.state.players} />
+					<Player playerInfo={this.state.players} playerID={this.state.id[0]} />
 				</div>
 			</div>
 		);
