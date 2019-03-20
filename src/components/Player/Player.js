@@ -21,7 +21,7 @@ class Player extends Component {
 				}&per_page=82`
 			)
 			.then(res => {
-				console.log('c', this.props.playerID);
+				// console.log('c', this.props.playerID);
 				const stats = res.data;
 				this.setState({ stats: stats.data });
 				console.log('stats', this.state.stats);
@@ -29,6 +29,25 @@ class Player extends Component {
 			.catch(err => {
 				console.log(err);
 			});
+	};
+
+	avgPts = () => {
+		let averagePoints = this.state.stats
+			.map(points => points.pts)
+			.reduce((tot, points) => {
+				return tot + points;
+			}, 0);
+		averagePoints = (averagePoints / this.state.stats.length).toFixed(2);
+		return averagePoints;
+	};
+
+	totalAst = () => {
+		let totalAsists = this.state.stats
+			.map(assist => assist.ast)
+			.reduce((tot, assist) => {
+				return tot + assist;
+			}, 0);
+		return totalAsists;
 	};
 
 	render() {
@@ -50,8 +69,10 @@ class Player extends Component {
 					<button onClick={this.getStats} type="button">
 						Get Stats
 					</button>
-					<PlayerStats />
+					{/* <PlayerStats /> */}
 				</div>
+				<div>Points: {this.avgPts()}</div>
+				<div>Assists: {this.totalAst()}</div>
 			</div>
 		);
 	}
