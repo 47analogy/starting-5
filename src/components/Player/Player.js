@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import './player.scss';
 import PlayerStats from '../PlayerStats/PlayerStats';
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
 
 class Player extends Component {
 	state = {
@@ -31,23 +33,80 @@ class Player extends Component {
 			});
 	};
 
+	gamesPyd = () => {
+		let gamesPlayed = this.state.stats.length;
+		return gamesPlayed;
+	};
+
 	avgPts = () => {
 		let averagePoints = this.state.stats
 			.map(points => points.pts)
 			.reduce((tot, points) => {
 				return tot + points;
 			}, 0);
-		averagePoints = (averagePoints / this.state.stats.length).toFixed(2);
+		averagePoints = (averagePoints / this.state.stats.length).toFixed(1);
 		return averagePoints;
 	};
 
-	totalAst = () => {
+	avgRebounds = () => {
+		let averageRebounds = this.state.stats
+			.map(rebounds => rebounds.reb)
+			.reduce((tot, rebounds) => {
+				return tot + rebounds;
+			}, 0);
+		averageRebounds = (averageRebounds / this.state.stats.length).toFixed(1);
+		return averageRebounds;
+	};
+
+	avgBlocks = () => {
+		let avgBlocks = this.state.stats
+			.map(blocks => blocks.blk)
+			.reduce((tot, blocks) => {
+				return tot + blocks;
+			}, 0);
+		avgBlocks = (avgBlocks / this.state.stats.length).toFixed(1);
+		return avgBlocks;
+	};
+
+	freeTrws = () => {
+		let freethrowAtt = this.state.stats
+			.map(freethrow => freethrow.fta)
+			.reduce((tot, attempted) => {
+				return tot + attempted;
+			}, 0);
+
+		console.log('att', freethrowAtt);
+
+		let freethrowMde = this.state.stats
+			.map(freethrow => freethrow.ftm)
+			.reduce((tot, made) => {
+				return tot + made;
+			}, 0);
+
+		console.log('made', freethrowMde);
+
+		let freeThrowAvg = ((freethrowMde / freethrowAtt) * 100).toFixed(1);
+		return freeThrowAvg;
+	};
+
+	avgAst = () => {
 		let totalAsists = this.state.stats
 			.map(assist => assist.ast)
 			.reduce((tot, assist) => {
 				return tot + assist;
 			}, 0);
+		totalAsists = (totalAsists / this.state.stats.length).toFixed(1);
 		return totalAsists;
+	};
+
+	avgSteals = () => {
+		let averageSteals = this.state.stats
+			.map(steals => steals.stl)
+			.reduce((tot, steals) => {
+				return tot + steals;
+			}, 0);
+		averageSteals = (averageSteals / this.state.stats.length).toFixed(1);
+		return averageSteals;
 	};
 
 	render() {
@@ -71,8 +130,13 @@ class Player extends Component {
 					</button>
 					{/* <PlayerStats /> */}
 				</div>
-				<div>Points: {this.avgPts()}</div>
-				<div>Assists: {this.totalAst()}</div>
+				<div className="player-stats">Games Played: {this.gamesPyd()}</div>
+				<div className="player-stats">Points: {this.avgPts()}</div>
+				<div className="player-stats">Assists: {this.avgAst()}</div>
+				<div className="player-stats">Rebounds: {this.avgRebounds()}</div>
+				<div className="player-stats">Blocks: {this.avgBlocks()}</div>
+				<div className="player-stats">Free Throw %: {this.freeTrws()}</div>
+				<div className="player-stats">Steals: {this.avgSteals()}</div>
 			</div>
 		);
 	}
