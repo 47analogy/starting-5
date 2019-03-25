@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './player.scss';
 import PlayerStats from '../PlayerStats/PlayerStats';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
+import { Button, Card } from 'react-bootstrap';
 
 class Player extends Component {
 	state = {
@@ -103,23 +103,31 @@ class Player extends Component {
 
 	render() {
 		return (
-			<div className="player-info">
-				{this.props.playerInfo.map(player => (
-					<div key={player.id}>
-						<div>
-							Name:
-							{player.first_name}
-							<span> {player.last_name}</span>
-						</div>
-
-						<div>Team: {player.team.full_name}</div>
-						<div>Position: {player.position}</div>
-					</div>
-				))}
-				<div>
-					<button onClick={this.getStats} type="button">
+			<div className="player">
+				<div className="player-info">
+					<Card style={{ width: '18rem' }}>
+						{this.props.playerInfo.map(player => (
+							<div key={player.id}>
+								<Card.Body>
+									<Card.Title>Player Info</Card.Title>
+									<Card.Text>
+										<div>
+											Name:
+											{player.first_name}
+											<span> {player.last_name}</span>
+										</div>
+										<div>Team: {player.team.full_name}</div>
+										<div>Position: {player.position}</div>
+									</Card.Text>
+								</Card.Body>
+							</div>
+						))}
+					</Card>
+					<Button onClick={this.getStats} variant="primary">
 						Get Stats
-					</button>
+					</Button>
+				</div>
+				<div>
 					{/* don't display stats until button is clicked */}
 					{this.state.stats.length > 1 && this.getStats ? (
 						<PlayerStats
