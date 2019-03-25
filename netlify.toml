@@ -1,4 +1,4 @@
 [build]
-base = "starting-5/"
-publish = "build/"
+base = ""
+publish = "starting-5/build/"
 command = "yarn run build"
