@@ -23,10 +23,8 @@ class Player extends Component {
 				}&per_page=82`
 			)
 			.then(res => {
-				// console.log('c', this.props.playerID);
 				const stats = res.data;
 				this.setState({ stats: stats.data });
-				console.log('stats', this.state.stats);
 			})
 			.catch(err => {
 				console.log(err);
@@ -74,17 +72,11 @@ class Player extends Component {
 			.reduce((tot, attempted) => {
 				return tot + attempted;
 			}, 0);
-
-		console.log('att', freethrowAtt);
-
 		let freethrowMde = this.state.stats
 			.map(freethrow => freethrow.ftm)
 			.reduce((tot, made) => {
 				return tot + made;
 			}, 0);
-
-		console.log('made', freethrowMde);
-
 		let freeThrowAvg = ((freethrowMde / freethrowAtt) * 100).toFixed(1);
 		return freeThrowAvg;
 	};
@@ -111,7 +103,7 @@ class Player extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="player-info">
 				{this.props.playerInfo.map(player => (
 					<div key={player.id}>
 						<div>
@@ -128,15 +120,20 @@ class Player extends Component {
 					<button onClick={this.getStats} type="button">
 						Get Stats
 					</button>
-					{/* <PlayerStats /> */}
+					{/* don't display stats until button is clicked */}
+					{this.state.stats.length > 1 && this.getStats ? (
+						<PlayerStats
+							statsPlayer={this.state.stats}
+							games={this.gamesPyd()}
+							points={this.avgPts()}
+							assists={this.avgAst()}
+							rebounds={this.avgRebounds()}
+							blocks={this.avgBlocks()}
+							freeThrow={this.freeTrws()}
+							steals={this.avgSteals()}
+						/>
+					) : null}
 				</div>
-				<div className="player-stats">Games Played: {this.gamesPyd()}</div>
-				<div className="player-stats">Points: {this.avgPts()}</div>
-				<div className="player-stats">Assists: {this.avgAst()}</div>
-				<div className="player-stats">Rebounds: {this.avgRebounds()}</div>
-				<div className="player-stats">Blocks: {this.avgBlocks()}</div>
-				<div className="player-stats">Free Throw %: {this.freeTrws()}</div>
-				<div className="player-stats">Steals: {this.avgSteals()}</div>
 			</div>
 		);
 	}

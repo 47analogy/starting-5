@@ -6,7 +6,8 @@ class PlayerList extends Component {
 	state = {
 		players: [],
 		id: 0,
-		playerName: ''
+		playerName: '',
+		isPlayerName: false
 	};
 
 	componentDidMount() {
@@ -38,7 +39,9 @@ class PlayerList extends Component {
 
 	onSearchSubmit = event => {
 		// TODO: Fix submit validation
+
 		this.getPlayer();
+		this.setState({ isPlayerName: true });
 		event.preventDefault();
 	};
 
@@ -56,7 +59,12 @@ class PlayerList extends Component {
 					</form>
 				</div>
 				<div>
-					<Player playerInfo={this.state.players} playerID={this.state.id[0]} />
+					{this.state.isPlayerName ? (
+						<Player
+							playerInfo={this.state.players}
+							playerID={this.state.id[0]}
+						/>
+					) : null}
 				</div>
 			</div>
 		);
