@@ -1,0 +1,4 @@
+[build]
+base = "starting-5/"
+publish = "starting-5/build/"
+command = "yarn build"
