@@ -14,7 +14,7 @@ class Player extends Component {
 			this.getStats();
 		}
 	}
-
+	// TODO: Validation
 	getStats = () => {
 		axios
 			.get(
@@ -105,20 +105,18 @@ class Player extends Component {
 		return (
 			<div className="player">
 				<div className="player-info">
-					<Card style={{ width: '18rem' }}>
+					<Card className="player-info-card">
 						{this.props.playerInfo.map(player => (
 							<div key={player.id}>
 								<Card.Body>
 									<Card.Title>Player Info</Card.Title>
-									<Card.Text>
-										<div>
-											Name:
-											{player.first_name}
-											<span> {player.last_name}</span>
-										</div>
-										<div>Team: {player.team.full_name}</div>
-										<div>Position: {player.position}</div>
-									</Card.Text>
+									<div>
+										Name:&nbsp;
+										{player.first_name}
+										<span> {player.last_name}</span>
+									</div>
+									<div>Team: {player.team.full_name}</div>
+									<div>Position: {player.position}</div>
 								</Card.Body>
 							</div>
 						))}
@@ -127,7 +125,7 @@ class Player extends Component {
 						Get Stats
 					</Button>
 				</div>
-				<div>
+				<div classname="player-stats">
 					{/* don't display stats until button is clicked */}
 					{this.state.stats.length > 1 && this.getStats ? (
 						<PlayerStats

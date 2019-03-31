@@ -1,25 +1,24 @@
 import React from 'react';
+import './playerStats.scss';
 import { Card } from 'react-bootstrap';
 
 const PlayerStats = props => {
 	const { games, points, assists, rebounds, blocks, freeThrow, steals } = props;
 	return (
-		<div>
-			<Card style={{ width: '18rem' }}>
-				<Card.Body>
-					<Card.Title>2018-19 Player Stats</Card.Title>
-					<Card.Text>
-						<div className="player-stats">Games played: {games}</div>
-						<div className="player-stats">Points: {points}</div>
-						<div className="player-stats">Assists: {assists}</div>
-						<div className="player-stats">Rebounds: {rebounds}</div>
-						<div className="player-stats">Blocks: {blocks}</div>
-						<div className="player-stats">Free Throw%: {freeThrow}</div>
-						<div className="player-stats">Steals: {steals}</div>
-					</Card.Text>
-				</Card.Body>
-			</Card>
-		</div>
+		<Card className="player-stats-card">
+			<Card.Body>
+				<Card.Title>2018-19 Game Avg Stats</Card.Title>
+				<ul>
+					<li className="player-stats">Games played: {games}</li>
+					<li className="player-stats">Points: {points}</li>
+					<li className="player-stats">Assists: {assists}</li>
+					<li className="player-stats">Rebounds: {rebounds}</li>
+					<li className="player-stats">Blocks: {blocks}</li>
+					<li className="player-stats">Steals: {steals}</li>
+					<li className="player-stats">Free Throws: {freeThrow}%</li>
+				</ul>
+			</Card.Body>
+		</Card>
 	);
 };
 

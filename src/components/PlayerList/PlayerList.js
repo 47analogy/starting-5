@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './playerList.scss';
 import Player from '../Player/Player';
 import axios from 'axios';
 
@@ -7,7 +8,8 @@ class PlayerList extends Component {
 		players: [],
 		id: 0,
 		playerName: '',
-		isPlayerName: false
+		isPlayerName: false,
+		form: React.createRef()
 	};
 
 	componentDidMount() {
@@ -15,6 +17,10 @@ class PlayerList extends Component {
 			this.getPlayer();
 		}
 	}
+
+	validate = () => {
+		this.form.current.reportValidity();
+	};
 
 	getPlayer = () => {
 		axios
@@ -38,8 +44,6 @@ class PlayerList extends Component {
 	};
 
 	onSearchSubmit = event => {
-		// TODO: Fix submit validation
-
 		this.getPlayer();
 		this.setState({ isPlayerName: true });
 		event.preventDefault();
@@ -49,12 +53,15 @@ class PlayerList extends Component {
 		return (
 			<div>
 				<div className="search-player">
-					<form onSubmit={this.onSearchSubmit}>
+					<form ref={this.form} onSubmit={this.onSearchSubmit}>
 						<input
 							type="text"
-							placeholder="Enter a player name..."
+							placeholder="Enter a first and last name..."
 							value={this.state.playerName}
 							onChange={this.handleSearchChange}
+							required
+							pattern="\w+\s\w+"
+							title="Player name should contain a first and last name"
 						/>
 					</form>
 				</div>

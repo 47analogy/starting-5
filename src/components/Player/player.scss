@@ -1,6 +1,22 @@
 @import '../../index.scss';
 
+.player {
+	margin-top: 40px;
+	display: flex;
+	justify-content: space-evenly;
+}
+
 .player-stats,
 .player-info {
 	color: $basicBlack;
+}
+// TODO: fix placement
+.submit-button {
+	margin-top: 20px;
+	border: 5px solid black;
+}
+
+.player-info-card {
+	width: 18rem;
+	height: 275px;
 }
