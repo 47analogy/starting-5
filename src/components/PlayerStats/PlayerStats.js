@@ -8,14 +8,14 @@ const PlayerStats = props => {
 		<Card className="player-stats-card">
 			<Card.Body>
 				<Card.Title>2018-19 Game Avg Stats</Card.Title>
-				<ul>
-					<li className="player-stats">Games played: {games}</li>
-					<li className="player-stats">Points: {points}</li>
-					<li className="player-stats">Assists: {assists}</li>
-					<li className="player-stats">Rebounds: {rebounds}</li>
-					<li className="player-stats">Blocks: {blocks}</li>
-					<li className="player-stats">Steals: {steals}</li>
-					<li className="player-stats">Free Throws: {freeThrow}%</li>
+				<ul className="player-stats">
+					<li>Games played: {games}</li>
+					<li>Points: {points}</li>
+					<li>Assists: {assists}</li>
+					<li>Rebounds: {rebounds}</li>
+					<li>Blocks: {blocks}</li>
+					<li>Steals: {steals}</li>
+					<li>Free Throws: {freeThrow}%</li>
 				</ul>
 			</Card.Body>
 		</Card>
@@ -25,6 +25,5 @@ const PlayerStats = props => {
 export default PlayerStats;
 
 /* TODO
-create card
 delete stats
 */

@@ -121,7 +121,10 @@ class Player extends Component {
 							</div>
 						))}
 					</Card>
-					<Button onClick={this.getStats} variant="primary">
+					<Button
+						className="submit-button"
+						onClick={this.getStats}
+						variant="primary">
 						Get Stats
 					</Button>
 				</div>
